@@ -1,0 +1,4 @@
+Potenzielle Fehler:
+
+- Andere Datenstruktur (bei Gain sind die Arrays in einem Dictionary, bei Chicago nicht)
+- Naming: Eigentlich dürfen SQL tables nicht mit Zahlen beginnen

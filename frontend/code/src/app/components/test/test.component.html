@@ -1,0 +1,107 @@
+<div id="map"></div>
+
+<mat-card class="card scrollable-card-container">
+  <mat-card-header class="header">
+    <mat-card-title class="title" style="text-align: center;">Deforestation in South America</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="card-content">
+    <div class="filter-container">
+      <h3 class="checkbox-header">Tree Cover Change</h3>
+      <div class="checkbox-container">
+        <mat-checkbox class="checkbox" [(ngModel)]="treeCoverChecked" (change)="fetchCoverData()">
+          <span class="checkbox-label">
+            Tree cover 
+            <mat-icon class="info-icon" matTooltip="Tree cover in 2000" aria-label="Info">info</mat-icon>
+          </span>
+        </mat-checkbox>
+      </div>
+      <div class="checkbox-container">
+        <mat-checkbox class="checkbox" [(ngModel)]="forestGainChecked" (change)="fetchGainData()">
+          <span class="checkbox-label">
+            Forest gain
+            <mat-icon class="info-icon" matTooltip="Forest gain between 2000 and 2012" aria-label="Info">info</mat-icon>
+          </span>
+        </mat-checkbox>
+      </div>
+      <div class="checkbox-container">
+        <mat-checkbox class="checkbox" [(ngModel)]="forestLossChecked" (change)="fetchLossData()">
+          <span class="checkbox-label">
+            Cover loss
+            <mat-icon class="info-icon" matTooltip="Forest lost on selected year" aria-label="Info">info</mat-icon>
+          </span>
+        </mat-checkbox>
+      </div>
+      <div class="checkbox-container">
+        <mat-checkbox class="checkbox" [(ngModel)]="cumulativeLossChecked" (change)="fetchLossData()" (ngModelChange)="forestLossChecked = cumulativeLossChecked">
+          <span class="checkbox-label">
+            Cummulated loss
+            <mat-icon class="info-icon" matTooltip="Cummulated forest loss since 2000 until selected year" aria-label="Info">info</mat-icon>
+          </span>
+        </mat-checkbox>
+      </div>
+      <div class="time-slider-container">
+        <h3 class="selected-year">{{ selectedYear }}</h3>
+        <input type="range" min="2000" max="2020" step="1" [(ngModel)]="selectedYear" (ngModelChange)="updateStatisticsForYear(); fetchLossData()">
+      </div>
+    </div>
+
+    <div class="statistics-box" *ngIf="selectedCountryName">
+      <div class="statistics-container">
+        <h2 class="statistics-header">{{ selectedCountryName }}</h2>
+        <div class="statistics-content">
+          <div class="statistics-group">
+            <p class="statistics-label">Forest area:</p>
+            <p class="statistics-value">{{ countryStatistics?.forestLand }} km²</p>
+            <p class="statistics-value">{{ countryStatistics?.shareForest }}% of land area</p>
+          </div>
+          <div class="statistics-group">
+            <p class="statistics-label">Forest composition:</p>
+            <div class="single-bar">
+              <div class="bar-segment naturally-generated" style="width: {{ countryStatistics?.shareNRG }}%;"></div>
+              <div class="bar-segment planted-forest" style="width: {{ countryStatistics?.sharePlanted }}%;"></div>
+            </div>
+            <div class="legend">
+              <div class="legend-item">
+                <div class="color-box naturally-generated"></div>
+                <span class="legend-label">Naturally Generated Forest: {{ countryStatistics?.shareNRG }}%</span>
+              </div>
+              <div class="legend-item">
+                <div class="color-box planted-forest"></div>
+                <span class="legend-label">Planted Forest: {{ countryStatistics?.sharePlanted }}%</span>
+              </div>
+            </div>
+          </div>
+          <div class="statistics-group" *ngIf="selectedYear !== 2000">
+            <p class="statistics-label">Change in Forest Coverage:</p>
+            <p class="statistics-value">In {{ selectedYear }}: {{ countryStatistics?.yearChange }}%</p>
+            <p class="statistics-value">Since 2000: {{ countryStatistics?.cumulativeYearChange }}%</p>
+          </div>
+          <div class="statistics-group">
+            <p class="statistics-label">Emissions:</p>
+            <div class="tooltip-container">
+              <p class="statistics-value">
+                Carbon stock in Living Biomass:
+                <mat-icon class="info-icon" matTooltip="Carbon stock in living biomass refers to the amount of carbon stored in the living parts of trees and vegetation, such as stems, branches, leaves, and roots. It's a measure of the carbon actively sequestered or stored within the biomass of living plants." aria-label="Info">info</mat-icon>
+              </p>
+              <p class="statistics-value">{{ countryStatistics?.carbonStock }} (million t)</p>
+            </div>
+            <div class="tooltip-container">
+              <p class="statistics-value">
+                CO2 removal from forest land:
+                <mat-icon class="info-icon" matTooltip="CO2 removal from forest land refers to the process by which forests absorb carbon dioxide (CO2) from the atmosphere through photosynthesis and store it in biomass. This process is important for regulating the Earth's carbon cycle and reducing the concentration of CO2 in the atmosphere, which helps to mitigate the impacts of climate change." aria-label="Info">info</mat-icon>
+              </p>
+              <p class="statistics-value">{{ countryStatistics?.co2Removal }} kt</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!selectedCountryName">
+      <h2 class="statistics-header">Click on a country to see some forest statistics!</h2>
+    </div>
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  database:
+    build: ./database
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/init:/docker-entrypoint-initdb.d
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/var/opt/gis
+    environment:
+      - DB_HOST=database
+  frontend:
+    build: ./frontend
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./frontend/code/src:/var/opt/gis/src

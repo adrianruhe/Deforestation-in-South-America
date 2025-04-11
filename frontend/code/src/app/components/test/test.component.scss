@@ -1,0 +1,187 @@
+.card {
+  position: fixed;
+  left: 2%;
+  top: 2%;
+  bottom: 2%;
+  width: 20vw;
+  z-index: 2;
+}
+
+.card-content {
+  height: calc(100% - 10%);
+}
+
+.scrollable-card-container {
+  height: 90vh;
+  overflow: auto;
+}
+
+#map {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+.header {
+  margin-right: 2%;
+}
+
+.title {
+  margin-right: 2%;
+  font-size: 1.5vw;
+  font-weight: bold;
+  line-height: 1.2;
+  font-family: "Arial", sans-serif;
+}
+
+.filter-container {
+  margin-left: 2%;
+}
+
+.checkbox {
+  margin-left: 0.5%;
+}
+
+.checkbox-label {
+  font-size: 1vw;
+}
+
+.statistics-container h2 {
+  font-size: 1vw;
+  margin-top: 2%;
+  margin-bottom: 1%;
+}
+
+.statistics-header, .selected-year, .checkbox-header {
+  font-size: 1vw !important;
+  font-weight: bold;
+  margin-top: 10%;
+  line-height: 1.2;
+}
+
+.statistics-text {
+  font-size: 2vw;
+}
+
+.time-slider-container h3 {
+  font-size: 1.5vw;
+  margin-top: 2%;
+}
+
+.time-slider-container input[type=range] {
+  width: 90%;
+}
+
+.statistics-box {
+  border: 0.1vw solid #ccc;
+  border-radius: 1vw;
+  padding: 0.5vw;
+  margin-top: 2%;
+}
+
+.statistics-content {
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+
+.statistics-container {
+  margin-bottom: 1.5%;
+}
+
+.statistics-group {
+  margin-bottom: 1%;
+}
+
+.statistics-label {
+  font-weight: bold;
+  font-size: 0.8vw;
+  margin-bottom: 0.5%;
+  line-height: 1.5;
+}
+
+.statistics-value {
+  margin-left: 1vw;
+  font-size: 0.8vw;
+  margin-bottom: 1%;
+  line-height: 1.5;
+}
+
+.statistics-value::before {
+  content: "•";
+  margin-right: 0.5vw;
+}
+
+.tooltip-container {
+  display: flex;
+  align-items: center;
+}
+
+::ng-deep .mat-tooltip {
+  font-size: 0.75vw;
+}
+
+.info-icon {
+  cursor: pointer;
+  font-size: 0.8vw;
+  vertical-align: super;
+  margin-left: 0.3vw;
+}
+
+.checkbox-container {
+  margin-bottom: 1%;
+}
+
+.time-slider-container {
+  margin-top: 2%;
+}
+
+.single-bar {
+  display: flex;
+  margin-bottom: 1vw;
+}
+
+.bar-segment {
+  height: 0.8vw;
+}
+
+.naturally-generated {
+  background-color: #64a440;
+}
+
+.planted-forest {
+  background-color: #9acc7e;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+}
+
+.color-box {
+  width: 20px;
+  height: 10px;
+  margin-right: 5px;
+}
+
+.legend-label {
+  font-size: 0.8vw;
+  color: #000;
+  line-height: 1.5;
+}
+
+#menu-container {
+  position: fixed;
+  left: 2%;
+  top: 2%;
+  bottom: 2%;
+  width: 18vw;
+  z-index: 2;
+  overflow-y: auto;
+  max-height: calc(100vh - 4%);
+}
